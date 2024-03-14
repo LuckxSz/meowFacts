@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 export const App = () => {
-  const [data, setData] = useState("");
+  const [facts, setFacts] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -10,7 +10,7 @@ export const App = () => {
           "https://meowfacts.herokuapp.com/?lang=por"
         );
         const responseData = await response.json();
-        setData(responseData);
+        setFacts(responseData);
       } catch (error) {
         console.log("something got wrong with this api", error);
       }
@@ -26,7 +26,7 @@ export const App = () => {
           Fatos sobre gatinhos
         </h1>
         <div className="text-lg text-gray-700">
-          {data && <p>{data.data}</p>}
+          {facts && <p>{facts.data}</p>}
         </div>
       </div>
     </div>
