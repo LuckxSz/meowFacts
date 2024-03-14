@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useFetch } from "./hooks/useFetch";
+import { motion } from "framer-motion"; // Importando motion da framer-motion
 
 export const App = () => {
   const { facts, isFetching } = useFetch(
@@ -13,12 +14,18 @@ export const App = () => {
   };
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0 }} // Opacidade inicial do componente
+      animate={{ opacity: 1 }} // Animação de entrada
+      exit={{ opacity: 0 }} // Animação de saída
+      transition={{ duration: 0.5 }} // Duração da transição
       className={`flex justify-center items-center h-screen ${
         darkMode ? "bg-gray-900 text-white" : "bg-pink-100 text-gray-900"
       }`}
     >
-      <button
+      <motion.button
+        whileHover={{ scale: 1.1 }} // Escala ao passar o mouse
+        whileTap={{ scale: 0.9 }} // Escala ao clicar
         onClick={toggleDarkMode}
         className={`absolute top-4 right-4 px-4 py-2 rounded-lg ${
           darkMode
@@ -27,9 +34,13 @@ export const App = () => {
         }`}
       >
         {darkMode ? "Light Mode" : "Dark Mode"}
-      </button>
+      </motion.button>
       {isFetching && <p>Loading...</p>}
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: -50 }} // Opacidade e posição inicial
+        animate={{ opacity: 1, y: 0 }} // Animação de entrada
+        exit={{ opacity: 0, y: 50 }} // Animação de saída
+        transition={{ duration: 0.5 }} // Duração da transição
         className={`shadow-lg max-w-md w-full bg-white rounded-lg p-8 ${
           darkMode ? "text-white" : "text-gray-800"
         }`}
@@ -44,7 +55,7 @@ export const App = () => {
         <div className={`${darkMode ? "text-gray-900" : "text-gray-700"}`}>
           {facts && <p>{facts.data}</p>}
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
