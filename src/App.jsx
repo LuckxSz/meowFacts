@@ -1,23 +1,7 @@
-import { useEffect, useState } from "react";
+import { useFetch } from "./hooks/useFetch";
 
 export const App = () => {
-  const [facts, setFacts] = useState("");
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          "https://meowfacts.herokuapp.com/?lang=por"
-        );
-        const responseData = await response.json();
-        setFacts(responseData);
-      } catch (error) {
-        console.log("something got wrong with this api", error);
-      }
-    };
-
-    fetchData();
-  }, []);
+  const { facts } = useFetch("https://meowfacts.herokuapp.com/?lang=por");
 
   return (
     <div className="flex justify-center items-center h-screen bg-pink-100">
