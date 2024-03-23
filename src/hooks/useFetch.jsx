@@ -7,7 +7,7 @@ const api = axios.create({
 
 export const useFetch = (url) => {
   const [facts, setFacts] = useState("");
-  const [isFetching, setIsFetching] = useState("true");
+  const [isFetching, setIsFetching] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
